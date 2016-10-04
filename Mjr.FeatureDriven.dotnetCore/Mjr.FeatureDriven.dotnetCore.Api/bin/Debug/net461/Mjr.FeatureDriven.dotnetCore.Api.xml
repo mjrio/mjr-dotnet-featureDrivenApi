@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mjr.FeatureDriven.dotnetCore.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Mjr.FeatureDriven.dotnetCore.Api.Features.V0.Users.UsersController.Post(Mjr.FeatureDriven.dotnetCore.Api.Data.Entities.User)">
+            api/v0/users
+        </member>
+        <member name="T:Mjr.FeatureDriven.dotnetCore.Api.Features.V1.Users.UsersController">
+            <summary>
+            Version 1 of the UsersController
+            </summary>
+        </member>
+        <member name="M:Mjr.FeatureDriven.dotnetCore.Api.Features.V1.Users.UsersController.AddUser(Mjr.FeatureDriven.dotnetCore.Api.Features.V1.Users.AddUser.Command)">
+            <summary>
+            Add user
+            </summary>
+            <param name="command"></param>
+            <returns>Some result</returns>
+        </member>
+        <member name="T:Mjr.FeatureDriven.dotnetCore.Api.Features.V2.Users.UpdateUser.Command">
+            <summary>
+            Fill in these fields to update the user
+            </summary>
+        </member>
+        <member name="T:Mjr.FeatureDriven.dotnetCore.Api.Infrastructure.Logging.NLogLogger">
+            <summary>
+            Wrap NLog's Logger in a Microsoft.Extensions.Logging's interface <see cref="T:Microsoft.Extensions.Logging.ILogger"/>.
+            </summary>
+        </member>
+        <member name="M:Mjr.FeatureDriven.dotnetCore.Api.Infrastructure.Logging.NLogLogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            Is logging enabled for this logger at this <paramref name="logLevel"/>?
+            </summary>
+            <param name="logLevel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mjr.FeatureDriven.dotnetCore.Api.Infrastructure.Logging.NLogLogger.IsEnabled(NLog.LogLevel)">
+            <summary>
+            Is logging enabled for this logger at this <paramref name="logLevel"/>?
+            </summary>
+        </member>
+        <member name="M:Mjr.FeatureDriven.dotnetCore.Api.Infrastructure.Logging.NLogLogger.ConvertLogLevel(Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            Convert loglevel to NLog variant.
+            </summary>
+            <param name="logLevel">level to be converted.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Mjr.FeatureDriven.dotnetCore.Api.Infrastructure.Logging.NLogLoggerProvider">
+            <summary>
+            Provider logger for NLog.
+            </summary>
+        </member>
+        <member name="M:Mjr.FeatureDriven.dotnetCore.Api.Infrastructure.Logging.NLogLoggerProvider.#ctor">
+            <summary>
+            <see cref="T:Mjr.FeatureDriven.dotnetCore.Api.Infrastructure.Logging.NLogLoggerProvider"/> with default options.
+            </summary>
+        </member>
+        <member name="M:Mjr.FeatureDriven.dotnetCore.Api.Infrastructure.Logging.NLogLoggerProvider.CreateLogger(System.String)">
+            <summary>
+            Create a logger with the name <paramref name="name"/>.
+            </summary>
+            <param name="name">Name of the logger to be created.</param>
+            <returns>New Logger</returns>
+        </member>
+        <member name="M:Mjr.FeatureDriven.dotnetCore.Api.Infrastructure.Logging.NLogLoggerProvider.Dispose">
+            <summary>
+            Cleanup
+            </summary>
+        </member>
+        <member name="M:Mjr.FeatureDriven.dotnetCore.Api.Infrastructure.Mapping.MappingConfig.Configure(StructureMap.IContainer)">
+            <summary>
+            Configures the automapping profiles only once at startup.
+            Should be triggered early.
+            </summary>
+        </member>
+        <member name="T:Mjr.FeatureDriven.dotnetCore.Api.Infrastructure.Mvc.ActionFilters.ValidationFilter">
+            <summary>
+                Action filter to check the model state before the controller action is invoked.
+            </summary>
+            <remarks>
+                From http://www.asp.net/web-api/overview/formats-and-model-binding/model-validation-in-aspnet-web-api
+            </remarks>
+        </member>
+        <member name="T:Mjr.FeatureDriven.dotnetCore.Api.Infrastructure.MvcIoC.StructureMapControllerActivator">
+            <summary>
+            If the built in IoC container does not suffice, could use this code to configure the services
+            services.AddSingletonIControllerActivator>(
+            new StructureMapControllerActivator(IoCConfig.Container));
+            </summary>
+        </member>
+    </members>
+</doc>

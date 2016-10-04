@@ -1,0 +1,18 @@
+﻿{
+  "version": "1.0.0-*",
+  "testRunner": "fixie",
+  "dependencies": {
+    "MediatR": "2.1.0",
+    "MediatR.Extensions.Microsoft.DependencyInjection": "1.0.1",
+    "StructureMap.Microsoft.DependencyInjection": "1.0.1",
+    "Fixie": "2.0.0-alpha-0001",
+    "Mjr.FeatureDriven.dotnetCore.Api": "1.0.0-*",
+    "Shouldly": "2.8.2",
+    "AutoFixture": "3.50.2",
+    "Respawn": "0.1.0"
+  },
+
+  "frameworks": {
+    "net461": { } 
+  }
+}
