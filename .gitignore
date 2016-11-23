@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Mjr.FeatureDriven.net4/Mjr.FeatureDriven.net4.Api/bin
+*.suo
+/Mjr.FeatureDriven.net4/Mjr.FeatureDriven.net4.Api/obj/Debug
+/Mjr.FeatureDriven.net4/Mjr.FeatureDriven.net4.Api.Tests/bin/Debug
+/Mjr.FeatureDriven.net4/Mjr.FeatureDriven.net4.Api.Tests/obj/Debug
+/Mjr.FeatureDriven.net4/packages
+*.user
+/Mjr.FeatureDriven.net4/Mjr.FeatureDriven.net4.Api.Database/bin/Debug
+/Mjr.FeatureDriven.net4/Mjr.FeatureDriven.net4.Api.Database/obj/Debug

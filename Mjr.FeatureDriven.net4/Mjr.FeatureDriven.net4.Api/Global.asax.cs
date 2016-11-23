@@ -1,0 +1,19 @@
+﻿using Mjr.FeatureDriven.net4.Api;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Http;
+using System.Web.Routing;
+using Mjr.FeatureDriven.net4.Api.App_Start;
+
+namespace Mjr.FeatureDriven.net4.Api
+{
+    public class WebApiApplication : System.Web.HttpApplication
+    {
+        protected void Application_Start()
+        {
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+        }
+    }
+}
