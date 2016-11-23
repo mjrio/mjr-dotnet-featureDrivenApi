@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+*.suo
+/Mjr.FeatureDriven.dotnetCore/Mjr.FeatureDriven.dotnetCore.Api/bin/Debug/net461
+/Mjr.FeatureDriven.dotnetCore/Mjr.FeatureDriven.dotnetCore.Api.Tests/bin/Debug/net461
+/Mjr.FeatureDriven.dotnetCore/Mjr.FeatureDriven.dotnetCore.Api/obj/Debug/net461
+*.dg
+/Mjr.FeatureDriven.dotnetCore/Mjr.FeatureDriven.dotnetCore.Api.Tests/obj/Debug/net461
