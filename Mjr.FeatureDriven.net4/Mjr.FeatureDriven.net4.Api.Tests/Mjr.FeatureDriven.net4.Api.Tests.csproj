@@ -124,6 +124,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mjr.FeatureDriven.net4.Api.Database\Mjr.FeatureDriven.net4.Api.Database.csproj">
+      <Project>{e1e7e744-3df7-4e14-ad90-587f74c59489}</Project>
+      <Name>Mjr.FeatureDriven.net4.Api.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mjr.FeatureDriven.net4.Api\Mjr.FeatureDriven.net4.Api.csproj">
       <Project>{B73A5F4A-F565-4CDB-B276-B2B2A3EC5C6B}</Project>
       <Name>Mjr.FeatureDriven.net4.Api</Name>
