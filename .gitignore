@@ -11,3 +11,8 @@
 *.user
 /Mjr.FeatureDriven.net4/Mjr.FeatureDriven.net4.Api.Database/bin/Debug
 /Mjr.FeatureDriven.net4/Mjr.FeatureDriven.net4.Api.Database/obj/Debug
+/Mjr.FeatureDriven.dotnetCore/Mjr.FeatureDriven.dotnetCore.Api/bin/Debug/net461
+*.dg
+/Mjr.FeatureDriven.dotnetCore/Mjr.FeatureDriven.dotnetCore.Api/obj/Debug/net461
+/Mjr.FeatureDriven.dotnetCore/Mjr.FeatureDriven.dotnetCore.Api.Tests/bin/Debug/net461
+/Mjr.FeatureDriven.dotnetCore/Mjr.FeatureDriven.dotnetCore.Api.Tests/obj/Debug/net461
