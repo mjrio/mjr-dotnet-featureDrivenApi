@@ -54,11 +54,11 @@ namespace Mjr.FeatureDriven.net4.Api
                         //    vc =>
                         //    {
                         //        vc
-                        //            .Version("v2", "Stocks API V2")
+                        //            .Version("v2", "Stock API V2")
                         //            .Description(ApiDescription)
                         //            .Contact(builder => builder.Email("mail@me.be"));
                         //        vc
-                        //            .Version("v1", "Stocks API V1")
+                        //            .Version("v1", "Stock API V1")
                         //            .Description(ApiDescription)
                         //            .Contact(builder => builder.Email("mail@me.be"));
                         //    });

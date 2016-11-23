@@ -13,8 +13,9 @@ namespace Mjr.FeatureDriven.net4.Api.Infrastructure.IoC
                 scanner.TheCallingAssembly();
                 scanner.WithDefaultConventions();
                 scanner.LookForRegistries();
-                scanner.AddAllTypesOf(typeof(IRequestHandler<,>));
-                scanner.AddAllTypesOf(typeof(INotificationHandler<>));
+                //scanner.AddAllTypesOf(typeof(IAsyncRequest<>));
+               // scanner.AddAllTypesOf(typeof(IRequestHandler<,>));
+              //  scanner.AddAllTypesOf(typeof(INotificationHandler<>));
                 scanner.AddAllTypesOf(typeof(IAsyncRequestHandler<,>));
                 scanner.AddAllTypesOf(typeof(IAsyncNotificationHandler<>));
                 scanner.AddAllTypesOf<Profile>();

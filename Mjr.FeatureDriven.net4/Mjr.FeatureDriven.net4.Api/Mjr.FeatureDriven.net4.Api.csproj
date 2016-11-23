@@ -85,8 +85,8 @@
       <HintPath>..\packages\NLog.4.3.11\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="StructureMap, Version=4.4.2.472, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\StructureMap.4.4.2\lib\net45\StructureMap.dll</HintPath>
+    <Reference Include="StructureMap, Version=4.4.1.451, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StructureMap.4.4.1\lib\net45\StructureMap.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
@@ -148,12 +148,19 @@
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Data\ApiContext.cs" />
+    <Compile Include="Data\Entities\Stock.cs" />
+    <Compile Include="Data\Entities\StockHistory.cs" />
+    <Compile Include="Data\Mapping\StockHistoryMap.cs" />
+    <Compile Include="Data\Mapping\StockMap.cs" />
+    <Compile Include="Features\V1\Stocks\GetStock.cs" />
     <Compile Include="Features\V1\Stocks\StocksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Authentication\AuthenticationHandler.cs" />
     <Compile Include="Infrastructure\Authentication\IUserSession.cs" />
+    <Compile Include="Infrastructure\Data\BaseDbContext.cs" />
     <Compile Include="Infrastructure\ExceptionHandling\ExceptionHandlingConfig.cs" />
     <Compile Include="Infrastructure\ExceptionHandling\ExceptionHandlingFilter.cs" />
     <Compile Include="Infrastructure\ExceptionHandling\Exceptions\BusinessRuleViolationException.cs" />

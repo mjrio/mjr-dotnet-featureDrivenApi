@@ -48,6 +48,10 @@
       <HintPath>..\packages\Fixie.1.0.2\lib\net45\Fixie.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation-Signed.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MediatR, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MediatR.2.1.0\lib\net45\MediatR.dll</HintPath>
       <Private>True</Private>
@@ -74,8 +78,8 @@
       <HintPath>..\packages\Shouldly.2.8.2\lib\net451\Shouldly.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="StructureMap, Version=4.4.2.472, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\StructureMap.4.4.2\lib\net45\StructureMap.dll</HintPath>
+    <Reference Include="StructureMap, Version=4.4.1.451, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StructureMap.4.4.1\lib\net45\StructureMap.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -87,12 +91,36 @@
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Features\V1\Stocks\GetStockTests.cs" />
+    <Compile Include="Infrastructure\AutoFixie\AutoFixtureCustomization.cs" />
+    <Compile Include="Infrastructure\AutoFixie\AutoFixtureFactory.cs" />
+    <Compile Include="Infrastructure\AutoFixie\DeleteData.cs" />
+    <Compile Include="Infrastructure\AutoFixie\FixieConvention.cs" />
+    <Compile Include="Infrastructure\AutoFixie\FixieExtensions.cs" />
+    <Compile Include="Infrastructure\AutoFixie\FixturePerClassConvention.cs" />
+    <Compile Include="Infrastructure\AutoFixie\FixturePerMethodConvention.cs" />
+    <Compile Include="Infrastructure\AutoFixie\IntegrationTestContainerFactory.cs" />
+    <Compile Include="Infrastructure\AutoFixie\IntegrationTestConvention.cs" />
+    <Compile Include="Infrastructure\AutoFixie\IntegrationTestsFixtureCustomization.cs" />
+    <Compile Include="Infrastructure\AutoFixie\SpecimenBuilders\IdOmitterBuilder.cs" />
+    <Compile Include="Infrastructure\AutoFixie\SpecimenBuilders\OmitListBuilder.cs" />
+    <Compile Include="Infrastructure\AutoFixie\TestContextFixture.cs" />
+    <Compile Include="Infrastructure\Data\CanAutoFixtureSaveAllEntitiesTests.cs" />
+    <Compile Include="Infrastructure\Data\CreateTestDatabase.cs" />
+    <Compile Include="Infrastructure\Data\DeleteDataTests.cs" />
+    <Compile Include="Infrastructure\Data\RecreateDatabaseTest.cs" />
+    <Compile Include="Infrastructure\IoC\IoCConfigTests.cs" />
+    <Compile Include="Infrastructure\Mapping\AutoMapperTests.cs" />
+    <Compile Include="Infrastructure\Security\TestUserSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

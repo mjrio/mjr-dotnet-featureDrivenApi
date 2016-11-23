@@ -173,9 +173,11 @@ namespace Mjr.FeatureDriven.net4.Api.Infrastructure.Tracing
         #region EF log methods (starting from 200)
 
         private const int EntityFrameworkVerboseEventId = 200;
+        private const int RawSqlId = 201;
+        private const int EntityFrameworkErrorEventId = 202;
+
 
         [Event(EntityFrameworkVerboseEventId, Message = "{0} (see EFMessage for more details)", Level = EventLevel.Verbose)]
-        // ReSharper disable once InconsistentNaming
         public void EntityFrameworkVerbose(string message, string EFMessage)
         {
              _logger.Info(EFMessage);
@@ -185,7 +187,6 @@ namespace Mjr.FeatureDriven.net4.Api.Infrastructure.Tracing
                     WriteEvent(EntityFrameworkVerboseEventId, message, EFMessage);
                 }
         }
-        private const int RawSqlId = 201;
 
         [Event(RawSqlId, Message = "{0} (see rawSql for more details)", Level = EventLevel.Verbose)]
         public void RawSql(string message, string rawSql)
@@ -194,6 +195,17 @@ namespace Mjr.FeatureDriven.net4.Api.Infrastructure.Tracing
                 if (!string.IsNullOrEmpty(rawSql) && !string.IsNullOrWhiteSpace(rawSql))
                 {
                     WriteEvent(RawSqlId, message, rawSql);
+                }
+        }
+        [Event(EntityFrameworkVerboseEventId, Message = "{0} (see EFMessage for more details)", Level = EventLevel.Verbose)]
+        
+        public void EntityFrameworkError(string message, string EFMessage)
+        {
+            _logger.Error(EFMessage);
+            if (IsEnabled())
+                if (!string.IsNullOrEmpty(EFMessage) && !string.IsNullOrWhiteSpace(EFMessage))
+                {
+                    WriteEvent(EntityFrameworkErrorEventId, message, EFMessage);
                 }
         }
         #endregion
