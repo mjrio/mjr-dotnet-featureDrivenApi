@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mjr.FeatureDriven.net4.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Mjr.FeatureDriven.net4.Api.Infrastructure.Routing.NamespaceHttpControllerSelector">
+            <summary>
+                Controller selector implementation that uses the controller namespace
+                as part of the selection decision.
+            </summary>
+            <remarks>
+                Largely inspired by sample located at:
+                http://blogs.msdn.com/b/webdev/archive/2013/03/08/using-namespaces-to-version-web-apis.aspx
+            </remarks>
+        </member>
+    </members>
+</doc>

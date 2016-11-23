@@ -3,3 +3,10 @@
 ################################################################################
 
 /Mjr.FeatureDriven.net4/Mjr.FeatureDriven.net4.Api/bin
+*.suo
+/Mjr.FeatureDriven.net4/Mjr.FeatureDriven.net4.Api/obj/Debug
+/Mjr.FeatureDriven.net4/Mjr.FeatureDriven.net4.Api.Tests/bin/Debug
+/Mjr.FeatureDriven.net4/Mjr.FeatureDriven.net4.Api.Tests/obj/Debug
+/Mjr.FeatureDriven.net4/packages
+/Mjr.FeatureDriven.net4/Mjr.FeatureDriven.net4.Api.Tests/Infrastructure
+*.user
