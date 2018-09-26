@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Poc.EventStore.Events;
 
 namespace Poc.Domain.MenuModule
 {
@@ -34,27 +33,6 @@ namespace Poc.Domain.MenuModule
         internal void Apply(DrinksAdded @event)
         {
             Drinks = @event.Drinks;
-        }
-
-    }
-
-    public class DrinksAdded : DomainEventBase
-    {
-        public List<string> Drinks { get; private set; }
-
-        public DrinksAdded(string streamId, List<string> drinks) : base(streamId)
-        {
-            Drinks = drinks;
-        }
-    }
-
-    public class MenuCreated : DomainEventBase
-    {
-        public string Name { get; private set; }
-
-        public MenuCreated(string streamId, string name) : base(streamId)
-        {
-            Name = name;
         }
     }
 }

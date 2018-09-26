@@ -113,9 +113,9 @@ namespace Poc.SqlStreamEventStore
             //in next version of SqlStream store this features will be available, for now just use plain old ado.net
             using (var connection = new SqlConnection(_connectionString))
             {
-                var cmd = new SqlCommand("select TOP @maxCount idOriginal from es.streams where idOriginal LIKE @startswith", connection);
-                cmd.Parameters.AddWithValue("@maxCount", maxCount);
-                cmd.Parameters.AddWithValue("@startswith", string.Concat("%", startsWith));
+                var cmd = new SqlCommand("select TOP 100 idOriginal from es.streams where idOriginal LIKE 'Snake%'", connection);
+                //cmd.Parameters.AddWithValue("@maxCount", maxCount);
+                //cmd.Parameters.AddWithValue("@startswith", string.Concat("%", startsWith));
 
                 await connection.OpenAsync(cancellationToken).NotOnCapturedContext();
                 using (var reader = await cmd.ExecuteReaderAsync(cancellationToken))
@@ -133,7 +133,7 @@ namespace Poc.SqlStreamEventStore
         {
             var commitHeaders = new Dictionary<string, object>
             {
-                {CreatedByHeader, Thread.CurrentPrincipal.Identity.Name},
+                {CreatedByHeader, Environment.UserName},
                 {CommitIdHeader, commitId},
                 {AggregateClrTypeHeader, eventSourcingAggregate.GetType().AssemblyQualifiedName}
             };
@@ -163,6 +163,7 @@ namespace Poc.SqlStreamEventStore
                     throw new DuplicateEventStoreAggregateException(eventSourcingAggregate.StreamId, weve);
                 }
             }
+            eventSourcingAggregate.ClearUncommittedEvents();
         }
         private static NewStreamMessage ToNewStreamMessage(Guid eventId, IDomainEvent evnt, IDictionary<string, object> headers)
         {
@@ -184,6 +185,11 @@ namespace Poc.SqlStreamEventStore
             var domainAssembly = typeof(IDomainEvent).Assembly;
             var type = domainAssembly.GetTypes()
                 .SingleOrDefault(x => typeof(IDomainEvent).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract && x.Name == evenTypeName);
+            if (type == null)
+            {
+                type = Assembly.Load("Poc.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null").GetTypes()
+                    .SingleOrDefault(x => typeof(IDomainEvent).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract && x.Name == evenTypeName);
+            }
             var settings = new JsonSerializerSettings
             {
                 ContractResolver = new PrivateSetterContractResolver(),

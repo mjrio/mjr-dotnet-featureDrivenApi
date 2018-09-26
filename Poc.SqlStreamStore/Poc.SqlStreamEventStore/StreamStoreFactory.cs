@@ -7,27 +7,26 @@ using SqlStreamStore.Infrastructure;
 
 namespace Poc.SqlStreamEventStore
 {
-    public class MsSqlStreamStore : IDisposable
+    public class StreamStoreFactory : IDisposable
     {
         public readonly string ConnectionString;
-        private readonly string _schema;
+        // private readonly string _schema;
         private readonly bool _deleteDatabaseOnDispose;
         public readonly string DatabaseName;
         private readonly ISqlServerDatabase _localInstance;
 
-        public MsSqlStreamStore(string schema,string databaseName)
+        public StreamStoreFactory(string databaseName = "Poc", bool deleteDatabaseOnDispose = false)
         {
-            _schema = schema;
-            _deleteDatabaseOnDispose = false;
+            _deleteDatabaseOnDispose = deleteDatabaseOnDispose;
             DatabaseName = databaseName;
-            _localInstance = (ISqlServerDatabase)new LocalSqlServerDatabase(DatabaseName);
+            _localInstance = new LocalSqlServerDatabase(DatabaseName);
 
             ConnectionString = CreateConnectionString();
         }
         public GetUtcNow GetUtcNow { get; set; } = SystemClock.GetUtcNow;
-        public  long MinPosition => 0;
+        public long MinPosition => 0;
 
-        public  async Task<IStreamStore> GetStreamStore()
+        public async Task<IStreamStore> GetStreamStore(string schema="es")
         {
             try
             {
@@ -35,15 +34,9 @@ namespace Poc.SqlStreamEventStore
             }
             catch (SqlException e) when (e.Number == 1801)
             {
-                //db exists, just ctn
+                //for testing, db exists, just ctn
             }
-            
 
-            return await GetStreamStore(_schema);
-        }
-
-        public async Task<IStreamStore> GetStreamStore(string schema)
-        {
             var settings = new MsSqlStreamStoreSettings(ConnectionString)
             {
                 Schema = schema,
@@ -51,34 +44,6 @@ namespace Poc.SqlStreamEventStore
             };
             var store = new SqlStreamStore.MsSqlStreamStore(settings);
             await store.CreateSchema();
-            return store;
-        }
-
-
-        public async Task<SqlStreamStore.MsSqlStreamStore> GetUninitializedStreamStore()
-        {
-            await CreateDatabase();
-
-            return new SqlStreamStore.MsSqlStreamStore(new MsSqlStreamStoreSettings(ConnectionString)
-            {
-                Schema = _schema,
-                GetUtcNow = () => GetUtcNow()
-            });
-        }
-
-        public async Task<SqlStreamStore.MsSqlStreamStore> GetMsSqlStreamStore()
-        {
-            await CreateDatabase();
-
-            var settings = new MsSqlStreamStoreSettings(ConnectionString)
-            {
-                Schema = _schema,
-                GetUtcNow = () => GetUtcNow()
-            };
-
-            var store = new SqlStreamStore.MsSqlStreamStore(settings);
-            await store.CreateSchema();
-
             return store;
         }
 

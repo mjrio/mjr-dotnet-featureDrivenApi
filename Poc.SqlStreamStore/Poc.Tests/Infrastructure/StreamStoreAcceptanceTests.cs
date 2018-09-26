@@ -1,62 +1,18 @@
-﻿namespace SqlStreamStore
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Poc.SqlStreamEventStore;
+using SqlStreamStore.Streams;
+
+namespace Poc.Tests.Infrastructure
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Shouldly;
-    using SqlStreamStore.Streams;
-    using Xunit;
-    using Xunit.Abstractions;
-
-    public abstract partial class StreamStoreAcceptanceTests : IDisposable
+    public abstract class StreamStoreAcceptanceTestsBase
     {
-        private readonly ITestOutputHelper _testOutputHelper;
-       // private readonly IDisposable _logCapture;
 
-        protected StreamStoreAcceptanceTests(ITestOutputHelper testOutputHelper)
-        {
-            _testOutputHelper = testOutputHelper;
-           // _logCapture = CaptureLogs(testOutputHelper);
-        }
+        protected StreamStoreFactory GetFixture() => new StreamStoreFactory("poc", true);
 
-        public void Dispose()
-        {
-           // _logCapture.Dispose();
-        }
-
-        protected abstract StreamStoreAcceptanceTestFixture GetFixture();
-
-      
-
-        [Fact]
-        public async Task When_dispose_and_read_then_should_throw()
-        {
-            using (var fixture = GetFixture())
-            {
-                var store = await fixture.GetStreamStore();
-                store.Dispose();
-
-                Func<Task> act = () => store.ReadAllForwards(Position.Start, 10);
-
-                act.ShouldThrow<ObjectDisposedException>();
-            }
-        }
-
-        [Fact]
-        public async Task Can_dispose_more_than_once()
-        {
-            using (var fixture = GetFixture())
-            {
-                var store = await fixture.GetStreamStore();
-                store.Dispose();
-
-                Action act = store.Dispose;
-
-                act.ShouldNotThrow();
-            }
-        }
 
         public static NewStreamMessage[] CreateNewStreamMessages(params int[] messageNumbers)
         {

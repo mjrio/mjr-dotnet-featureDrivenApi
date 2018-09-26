@@ -20,7 +20,7 @@ namespace Poc.EventStore.Events
         {
             StreamId = streamId;
             //will be overwritten on rehadration of the event.
-            EventCreator = Thread.CurrentPrincipal.Identity.Name;
+            EventCreator = Environment.UserName;
             EventId = Guid.NewGuid();
             EventTime = DateTime.UtcNow;
         }

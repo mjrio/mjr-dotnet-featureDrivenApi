@@ -1,14 +1,15 @@
-﻿using SqlStreamStore.Infrastructure;
+﻿using System;
+using System.Threading.Tasks;
+using Poc.Tests.Infrastructure;
+using Shouldly;
+using SqlStreamStore;
+using SqlStreamStore.Infrastructure;
+using SqlStreamStore.Streams;
+using Xunit;
 
-namespace SqlStreamStore
+namespace Poc.Tests
 {
-    using System;
-    using System.Threading.Tasks;
-    using Shouldly;
-    using SqlStreamStore.Streams;
-    using Xunit;
-
-    public partial class StreamStoreAcceptanceTests
+    public class StreamStoreAcceptanceTests2: StreamStoreAcceptanceTestsBase
     {
 
         [Fact, Trait("Category", "AppendStream")]
@@ -32,15 +33,12 @@ namespace SqlStreamStore
         [Fact, Trait("Category", "AppendStream")]
         public async Task Can_DeterministicGuidGenerator()
         {
-
+            Guid myAppGuid = new Guid("8D1E0B02-0D78-408E-8211-F899BE6F8AA2");
+            var generator = new DeterministicGuidGenerator(myAppGuid);
             using (var fixture = GetFixture())
             {
                 using (var store = await fixture.GetStreamStore())
                 {
-
-                    // ReSharper disable once SuggestVarOrType_SimpleTypes
-                    Guid myAppGuid = new Guid("8D1E0B02-0D78-408E-8211-F899BE6F8AA2");
-                    var generator = new DeterministicGuidGenerator(myAppGuid);
 
                     const string streamId = "stream-1";
                     var messageId = generator.Create(streamId, ExpectedVersion.Any, "data");
@@ -55,8 +53,7 @@ namespace SqlStreamStore
                     var m3 = new NewStreamMessage(messageId3, "t", "other data");
 
                     // Creates stream with idempotent attempt
-                        await store.AppendToStream(streamId, ExpectedVersion.Any, new[] { m1,  m3 });
-
+                    await store.AppendToStream(streamId, ExpectedVersion.Any, new[] { m1,  m3 });
 
                 }
             }
@@ -66,32 +63,19 @@ namespace SqlStreamStore
         [Fact, Trait("Category", "AppendStream")]
         public async Task Can_append_multiple_messages_to_stream_with_correct_expected_version()
         {
-
             using (var fixture = GetFixture())
             {
                 using (var store = await fixture.GetStreamStore())
                 {
+                    const string streamId = "stream-2";
+                    var result1 = await store
+                        .AppendToStream(streamId, ExpectedVersion.NoStream, CreateNewStreamMessages(1, 2, 3));
+                    //appending to same stream but we expect the stream to be at a specific version.
+                    var result2 =
+                        await store.AppendToStream(streamId, result1.CurrentVersion, CreateNewStreamMessages(4, 5, 6));
 
-                    const string streamId = "stream-1";
-
-                    var m1 = new NewStreamMessage(new Guid("00000000-0000-0000-0000-000000000001"), "t", "data");
-                    var m2 = new NewStreamMessage(new Guid("00000000-0000-0000-0000-000000000002"), "t", "data");
-                    var m3 = new NewStreamMessage(new Guid("00000000-0000-0000-0000-000000000003"), "t", "data");
-
-                    // Creates stream
-                    await store.AppendToStream(streamId, ExpectedVersion.Any, new[] { m1, m2, m3 });
-
-                    // Idempotent appends
-                    await store.AppendToStream(streamId, ExpectedVersion.Any, new[] { m1, m2, m3 });
-                    await store.AppendToStream(streamId, ExpectedVersion.Any, new[] { m1, m2 });
-                    await store.AppendToStream(streamId, ExpectedVersion.Any, new[] { m2, m3 });
-                    await store.AppendToStream(streamId, ExpectedVersion.Any, new[] { m3 });
-
-                    // Throws WrongExpectedVersionException
-                    await store.AppendToStream(streamId, ExpectedVersion.Any, new[] { m2, m1, m3 }); // out of order
-
-                    var m4 = new NewStreamMessage(new Guid("00000000-0000-0000-0000-000000000004"), "t", "data");
-                    await store.AppendToStream(streamId, ExpectedVersion.Any, new[] { m3, m4 }); // partial previous write
+                    result2.CurrentVersion.ShouldBe(5);
+                    result2.CurrentPosition.ShouldBeGreaterThan(result1.CurrentPosition);
                 }
             }
         }

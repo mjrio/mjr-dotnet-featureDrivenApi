@@ -4,12 +4,6 @@ using System.Text;
 
 namespace Poc.Console1.Memento
 {
-
-    public class FooMemento
-    {
-        public int Balance { get; set; }
-    }
-
     public class Foo
     {
         public Foo(string id)
