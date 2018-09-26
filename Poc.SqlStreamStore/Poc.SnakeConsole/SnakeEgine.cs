@@ -26,7 +26,7 @@ namespace Poc.SnakeConsole
         };
 
         double sleepTime = 100;
-        int direction ;
+        int direction;
         Random randomNumbersGenerator = new Random();
         Queue<Position> snakeElements = new Queue<Position>();
         private SqlStreamEventStore.EventStore store;
@@ -40,21 +40,19 @@ namespace Poc.SnakeConsole
 
         public void Start()
         {
-             right = 0;
-             left = 1;
-             down = 2;
-             up = 3;
-             lastFoodTime = 0;
-             foodDissapearTime = 8000;
-             negativePoints = 0;
+            right = 0;
+            left = 1;
+            down = 2;
+            up = 3;
 
-            
-             sleepTime = 100;
-             direction = right;
+            foodDissapearTime = 8000;
+            negativePoints = 0;
+            sleepTime = 100;
+            direction = right;
             Console.BufferHeight = Console.WindowHeight;
             lastFoodTime = Environment.TickCount;
 
-             obstacles = new List<Position>()
+            obstacles = new List<Position>()
             {
                 new Position(12, 12),
                 new Position(14, 20),
@@ -70,7 +68,7 @@ namespace Poc.SnakeConsole
                 snakeElements.Enqueue(new Position(0, i));
             }
 
-           
+
             do
             {
                 food = new Position(randomNumbersGenerator.Next(0, Console.WindowHeight),
@@ -174,6 +172,7 @@ namespace Poc.SnakeConsole
                     {
                         food = new Position(randomNumbersGenerator.Next(0, Console.WindowHeight),
                             randomNumbersGenerator.Next(0, Console.WindowWidth));
+
                     } while (snakeElements.Contains(food) || obstacles.Contains(food));
                     lastFoodTime = Environment.TickCount;
                     WriteFood(food);
@@ -212,7 +211,7 @@ namespace Poc.SnakeConsole
 
                 sleepTime -= 0.01;
 
-                Thread.Sleep((int) sleepTime);
+                Thread.Sleep((int)sleepTime);
             }
         }
 

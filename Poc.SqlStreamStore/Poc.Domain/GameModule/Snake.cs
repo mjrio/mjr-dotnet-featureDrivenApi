@@ -56,7 +56,7 @@ namespace Poc.Domain.GameModule
         {
             Positions.Add(Position.Right);
         }
-
+        
     }
 
     public struct Position : IEquatable<Position>

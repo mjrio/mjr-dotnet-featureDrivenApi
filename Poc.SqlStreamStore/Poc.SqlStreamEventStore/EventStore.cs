@@ -176,9 +176,17 @@ namespace Poc.SqlStreamEventStore
             };
             var metadata = JsonConvert.SerializeObject(eventHeaders);
             var typeName = evnt.EventTypeName;
-
+            var a= CreateNewStreamMessage(default, null);
             return new NewStreamMessage(eventId, typeName, data, metadata);
         }
+
+        private static NewStreamMessage CreateNewStreamMessage(Guid eventId, IDomainEvent evnt)
+        {
+            var data = JsonConvert.SerializeObject(evnt);
+            var typeName = evnt.EventTypeName;
+            return new NewStreamMessage(eventId, typeName, data);
+        }
+
         private IDomainEvent Deserialize(string evenTypeName, string data)
         {
             //should be optimized for performance.
